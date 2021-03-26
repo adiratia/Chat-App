@@ -1,8 +1,11 @@
 import logo from './logo.svg';
-import {BrowserRouter,Switch, Route, Link } from 'react-router-dom'
+import {BrowserRouter,Switch, Route, Link,Redirect } from 'react-router-dom'
 import {connect} from 'react-redux'; 
 import * as ChatActions from './store/actions/chatActions'
 import React from 'react';
+import Auth from './components/pages/Auth';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
 
 
 
@@ -13,31 +16,31 @@ class App extends React.Component {
   render(){
     return (
       <div className="App">
-        <button onClick={e=>{
-          e.preventDefault();
-          if(this.props.socket){
-            this.props.socket.send({
-              type:'Hello',
-              data:'World'
-            })
-          }
-        }}>Send message</button>
         <BrowserRouter>
         <Switch>
           <Route
             path="/login"
-            render= {props =>{
-              return(
-                <h1>Login</h1>
-              )
-            }} />
+            component={Auth}
+         />
+            <Route
+            path="/signup"
+            component={Auth}
+         />
 
           <Route
             path="/"
             render= {props =>{
-              return(
-                <h1>Root</h1>
-              )
+              if (!this.props.token){
+                return(
+                  <Redirect to="/login"/>
+
+                )
+              }
+              else{
+                return(
+                  <h1>Root</h1>
+                )
+              }
             }} />
         </Switch>
         </BrowserRouter>
