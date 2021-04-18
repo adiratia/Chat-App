@@ -5,6 +5,7 @@ import React from 'react';
 import * as AuthActions from './store/actions/authActions';
 import Auth from './components/pages/Auth';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import Messenger from "./components/pages/Messenger";
 
 
 
@@ -49,6 +50,21 @@ class App extends React.Component {
                 )
               }
             }}         />
+          <Route
+            path="/:threadId"
+            render= {props =>{
+              if (!this.props.token){
+                return(
+                  <Redirect to="/login"/>
+
+                )
+              }
+              else{
+                return(
+                  <Messenger/>
+                )
+              }
+            }} />
 
           <Route
             path="/"
@@ -61,7 +77,7 @@ class App extends React.Component {
               }
               else{
                 return(
-                  <h1>Root</h1>
+                  <Messenger/>
                 )
               }
             }} />

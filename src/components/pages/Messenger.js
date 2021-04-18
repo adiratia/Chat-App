@@ -3,13 +3,15 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom'; 
 import Sidebar from '../partials/Sidebar';
 import ThreadView from '../partials/ThreadView';
+import ChatInput from '../partials/Chatinput';
 
 class Messenger extends Component {
     render(){
         return(
-            <div calssName="messenger-container">
+            <div className="messenger-container">
                 <Sidebar/>
                 <ThreadView/>
+                <ChatInput/>
             </div>
         )
 

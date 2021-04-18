@@ -71,3 +71,21 @@ body, html, .App, #root, .auth-wrapper {
 .forgot-password a {
   color: #167bff;
 }
+
+.sidebar {
+  background: #fff;
+  float: left;
+  width: 300px;
+  max-width: 25%;
+  height: 100vh;
+  border-right: 1px solid #ddd;
+  position:fixed;
+  top:0px;
+}
+.main-view{
+  position: fixed;
+  left:300px;
+  background: #fafafa;
+  height: 100vh;
+  width: 100%;
+}

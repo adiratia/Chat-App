@@ -11,16 +11,18 @@ export const setupSocket=()=>{
         });
     }
 
-    socket.onmessage = (message =>{
+    socket.onmessage = (message)=>{
         console.log("message",message);
-        let data= JSON.parse(message);
+       let data = JSON.parse(message.data); 
+
         switch(data.type){
+
             case 'LOGGEDIN':
                 dispatch(AuthActions.loggedIn(data))
                 break;
             default:
                 //do nothing
         }
-    })
+    }
 }
 }

@@ -14,9 +14,9 @@ body {
   display: flex;
   font-weight: 400;
   font-family: sans-serif;
-  background: #12c2e9;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #f64f59, #c471ed, #12c2e9);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: rgba(25, 140, 235, 0.849);  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, rgba(25, 140, 235, 0.849), rgba(25, 140, 235, 0.849), rgba(25, 140, 235, 0.849));  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, rgba(25, 140, 235, 0.849), rgba(25, 140, 235, 0.849), rgba(25, 140, 235, 0.849)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   
 }
 
@@ -104,4 +104,71 @@ body, html, .App, #root, .outer {
 
 .forgot-password a {
   color: #167bff;
+}
+.sidebar {
+  background: #fff;
+  float: left;
+  width: 300px;
+  max-width: 25%;
+  height: 100vh;
+  border-right: 1px solid #ddd;
+  position:fixed;
+  top:0px;
+}
+.main-view{
+  position: fixed;
+  left:300px;
+  background: #fafafa;
+  height: 100vh;
+  width: 100%;
+}
+ul.thread-list{
+  list-style: none;
+  padding:0px;
+}
+ul.thread-list li a .zmdi{
+  float: left;
+  font-size:48px;
+  padding: 5px 15px;
+  color :#ccc
+}
+ul.thread-list li a{
+  text-decoration:  none;
+  color :#222;
+
+}
+ul.thread-list li a h5{
+  font-size:  14px;
+  padding : 10px;
+  font-weight: 700;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+
+}
+ul.thread-list li a p{
+  font-size:  14px;
+  color :#999;
+
+}
+ul.thread-list label{
+  padding-left: 20px;
+  font-size: 12px;
+  color:#aaa;
+  padding-top: 10px;
+}
+
+.input-view{
+  position: fixed;
+  left: 300px;
+  width: 100%;
+  bottom: 0px;
+}
+.input-view .form-control{
+  border: none;
+  border-radius: 0px;
+  border-top: 1px solid #eee;
+  font-size: 10px;
+  padding: 10px;
+  height: auto;
+
 }
