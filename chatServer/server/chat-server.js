@@ -74,6 +74,20 @@ ws.on('connection' ,(ws)=>{
                 case 'LOGIN':
                     console.log("Heree login");
                     login(parsed.data.email,parsed.data.password);
+                case 'SEARCH':
+                    console.log("searching for", parsed.data);
+                    models.User.find({where:{email:{like:parsed.data}}},(err2,users)=>{
+                        if(!err2 && users){
+                            console.log("users :", users);
+
+                            ws.send(JSON.stringify({
+                                type:'GOT_USERS',
+                                data:{
+                                    users: users
+                                }
+                            }))
+                        }
+                    })
                 default:
                     console.log("Nothing o serr here");
             
