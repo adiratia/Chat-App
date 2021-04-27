@@ -12,8 +12,9 @@ import Messenger from "./components/pages/Messenger";
 
 class App extends React.Component {
   componentDidMount(){
-    this.props.setupSocket();
+    this.props.setupSocket(this.props.token,this.props.userId);
   }
+
   render(){
     return (
       <div className="App">
@@ -94,8 +95,8 @@ const mapStateToProps = state=>({
   ...state.chat
 })
 const mapDisptchtoProps =dispatch =>({
-  setupSocket: ()=>{
-    dispatch(ChatActions.setupSocket());
+  setupSocket: (token,userId)=>{
+    dispatch(ChatActions.setupSocket(token,userId));
   },
   logout: () =>{
     dispatch(AuthActions.logout());

@@ -6,6 +6,18 @@ const clients = [];
 
 
 ws.on('connection' ,(ws)=>{
+    function getInitialThreads(userId){
+        models.Thread.find({where:{}}, (err,threads) =>{
+            if(!err && threads){
+                ws.send(JSON.stringify({
+                    type: 'INITIAL_THREADS',
+                    data:threads,
+                }))
+                //clients.filter(c=> c.id ===userId).map()
+            }
+        })
+
+    }
     function login(email,pass){
         console.log("EM",email,pass);
         models.User.login({email:email,password:pass},(err,result)=>{
@@ -31,14 +43,14 @@ ws.on('connection' ,(ws)=>{
 
                         clients.push(userObject);
                         console.log("Current clients", clients);
-
+                        getInitialThreads(user.id);
                         ws.send(JSON.stringify({
                             type:'LOGGEDIN',
                             data:{
                                 session:result,
                                 user:user
-                            }
-                        }))
+                            },
+                        }));
                     }
                 })
             }
@@ -72,6 +84,29 @@ ws.on('connection' ,(ws)=>{
                        }
                    }) ;
                    break;
+                case 'CONNECT_WITH_TOKEN':
+                    models.User.findById(parsed.data.userId, (err2,user)=>{
+                        if(!err2 &&user){
+                            const userObject={
+                                id:user.id,
+                                email: user.email,
+                                ws:ws
+                            };
+    
+                            clients.push(userObject);
+                            console.log("Current clients", clients);
+                            getInitialThreads(user.id);
+                            ws.send(JSON.stringify({
+                                type:'LOGGEDIN',
+                                data:{
+                                    session:result,
+                                    user:user
+                                },
+                            }));
+
+                        }
+                    });
+                    break;
                 case 'LOGIN':
                     console.log("Heree login");
                     login(parsed.data.email,parsed.data.password);
@@ -124,6 +159,7 @@ ws.on('connection' ,(ws)=>{
                     });
                     
                     break;
+                case 'THREAD_LOAD':
                 default:
                     console.log("Nothing o serr here");
             
